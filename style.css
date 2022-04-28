@@ -77,7 +77,7 @@ h6 {
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 .container {
-  max-width: 1260px;
+  /* max-width: 1260px; */
   padding: 0 10px;
   margin: 0 auto;
 }
@@ -154,7 +154,7 @@ body {
 /* header__button_drop_size */
 .header__button_drop_big {
   position: relative;
-  flex: 0 1 465px;
+  flex: 1 1 465px;
   min-width: 240px;
 }
 .header__button_drop_small {
@@ -329,14 +329,6 @@ body {
   flex: 0 0 103px;
 }
 
-.aside__wrapper {
-  height: 100%;
-}
-
-.aside__container {
-  height: 100%;
-}
-
 .aside__body {
   display: flex;
   flex-direction: column;
@@ -392,9 +384,29 @@ body {
 }
 
 .order-sheet__container {
-  max-width: 1164px;
   padding: 0 16px;
-  margin: 0 auto;
+}
+
+.order-sheet__body {
+  overflow-y: auto;
+  max-height: calc(100vh - 124px);
+}
+
+.order-sheet__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-sheet__body::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 8px;
+}
+
+.order-sheet__body::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  border: 6px solid #666;
+  border-left: 0;
+  border-right: 0;
+  background-color: #666;
 }
 
 .sheet {
