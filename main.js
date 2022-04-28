@@ -10,6 +10,7 @@ buttonDaySelection.addEventListener("click", (evt) => {
     daySelection.classList.toggle("_active_drop");
   }
 });
+
 buttonStatusSelection.addEventListener("click", (evt) => {
   if (!evt.target.closest(".status-selection")) {
     statusSelection.classList.toggle("_active_drop");
