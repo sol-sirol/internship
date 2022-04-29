@@ -1,5 +1,6 @@
 import "./App.css";
 import MyAside from "./components/MyAside";
+import MyFooter from "./components/MyFooter";
 import MyHeader from "./components/MyHeader";
 import OrderSheet from "./components/OrderSheet";
 
@@ -117,15 +118,7 @@ function App() {
                       </div>
                     </div>
                   </div>
-                  <footer className="footer">
-                    <div className="footer__wrapper">
-                      <div className="footer__container">
-                        <div className="footer__body">
-                          Общее количество резервов: 2(2). Всего гостей: 18(18)
-                        </div>
-                      </div>
-                    </div>
-                  </footer>
+                  <MyFooter />
                 </div>
               </div>
             </div>
