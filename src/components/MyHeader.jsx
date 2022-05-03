@@ -15,21 +15,27 @@ const MyHeader = () => {
             <SvgSelector name="label" />
           </div>
         </button>
+
         <DropDownDayList />
 
         <HeaderButton title="Календарь">
           <SvgSelector name="date_range" />
         </HeaderButton>
+
         <DropDownStatusList />
+
         <HeaderButton title="ХЗ, честно сказать">
           <SvgSelector name="map-unfold" />
         </HeaderButton>
+
         <HeaderButton title="Поиск">
           <SvgSelector name="search" />
         </HeaderButton>
+
         <HeaderButton title="Настройки">
           <SvgSelector name="settings" />
         </HeaderButton>
+
         <HeaderButton title="Журнал">
           <SvgSelector name="assignment" />
         </HeaderButton>
