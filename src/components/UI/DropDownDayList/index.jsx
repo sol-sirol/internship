@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import SvgSelector from "../../../assets/images";
+import MyImage from "../MyImage";
+
+import ArrowDropDown from "../../../assets/images/header/arrow_drop_down.svg";
 
 export const DropDownDayList = (props) => {
   const [openness, setOpenness] = useState(false);
@@ -53,7 +55,16 @@ export const DropDownDayList = (props) => {
     >
       Завтра, 4 февраля (понедельник)
       <span>
-        <SvgSelector name="arrow_drop_down" />
+        <MyImage
+          imageSrc={ArrowDropDown}
+          imageStyle={{
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            height: "11px",
+            width: "11px",
+          }}
+        />
       </span>
       <div className={`day-selection ${openness ? "_active_drop" : ""}`}>
         <div className="day-selection__wrapper">

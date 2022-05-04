@@ -1,4 +1,3 @@
-import SvgSelector from "../assets/images";
 import SheetSection from "./SheetSection";
 import MyImage from "./UI/MyImage";
 

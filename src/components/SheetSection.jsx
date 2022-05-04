@@ -1,5 +1,3 @@
-import SvgSelector from "../assets/images";
-
 const SheetSection = (props) => {
   return (
     <div className="sheet__section">

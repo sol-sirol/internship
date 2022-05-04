@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SvgSelector from "../../assets/images";
 import MyImage from "./MyImage";
 
 import Checked from "../../assets/images/checkbox/checked.svg";

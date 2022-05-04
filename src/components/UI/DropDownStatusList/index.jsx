@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import SvgSelector from "../../../assets/images";
 import StatusInput from "../StatusInput";
+import MyImage from "../MyImage";
+
+import ArrowDropDown from "../../../assets/images/header/arrow_drop_down.svg";
 
 export const DropDownStatusList = (props) => {
   const [openness, setOpenness] = useState(false);
@@ -58,7 +60,16 @@ export const DropDownStatusList = (props) => {
     >
       Несколько значений
       <span>
-        <SvgSelector name="arrow_drop_down" />
+        <MyImage
+          imageSrc={ArrowDropDown}
+          imageStyle={{
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+            backgroundPosition: "center",
+            height: "11px",
+            width: "11px",
+          }}
+        />
       </span>
       <div className={`status-selection ${openness ? "_active_drop" : ""}`}>
         <div className="status-selection__wrapper">
