@@ -22,7 +22,7 @@ const StatusInput = (props) => {
         >
           <span>
             <MyImage
-              checkBoxClass="status-selection__svg_checked"
+              addedClass="status-selection__svg_checked"
               imageSrc={Checked}
               imageStyle={{
                 backgroundRepeat: "no-repeat",
@@ -33,7 +33,7 @@ const StatusInput = (props) => {
             />
             <></>
             <MyImage
-              checkBoxClass="status-selection__svg_unchecked"
+              addedClass="status-selection__svg_unchecked"
               imageSrc={UnChecked}
               imageStyle={{
                 backgroundRepeat: "no-repeat",
