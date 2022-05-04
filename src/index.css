@@ -74,3 +74,6 @@ h6 {
   font-weight: inherit;
 }
 /*--------------------*/
+.bg-svg {
+  width: 100%;
+}

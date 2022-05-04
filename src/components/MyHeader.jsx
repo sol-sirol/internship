@@ -1,7 +1,14 @@
-import SvgSelector from "../assets/images";
 import { DropDownDayList } from "./UI/DropDownDayList";
 import { DropDownStatusList } from "./UI/DropDownStatusList";
 import HeaderButton from "./UI/HeaderButton";
+import MyImage from "./UI/MyImage";
+
+import Search from "../assets/images/header/search.svg";
+import Label from "../assets/images/header/label.svg";
+import DateRange from "../assets/images/header/date_range.svg";
+import MapUnfold from "../assets/images/header/map-unfold.svg";
+import Settings from "../assets/images/header/settings.svg";
+import Assignment from "../assets/images/header/assignment.svg";
 
 const MyHeader = () => {
   return (
@@ -12,32 +19,80 @@ const MyHeader = () => {
           title="Новый резерв"
         >
           <div className="header__logo">
-            <SvgSelector name="label" />
+            <MyImage
+              imageSrc={Label}
+              imageStyle={{
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                height: "14px",
+              }}
+            />
           </div>
         </button>
 
         <DropDownDayList />
 
         <HeaderButton title="Календарь">
-          <SvgSelector name="date_range" />
+          <MyImage
+            imageSrc={DateRange}
+            imageStyle={{
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "24px",
+            }}
+          />
         </HeaderButton>
 
         <DropDownStatusList />
 
         <HeaderButton title="ХЗ, честно сказать">
-          <SvgSelector name="map-unfold" />
+          <MyImage
+            imageSrc={MapUnfold}
+            imageStyle={{
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "24px",
+            }}
+          />
         </HeaderButton>
 
         <HeaderButton title="Поиск">
-          <SvgSelector name="search" />
+          <MyImage
+            imageSrc={Search}
+            imageStyle={{
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "24px",
+            }}
+          />
         </HeaderButton>
 
         <HeaderButton title="Настройки">
-          <SvgSelector name="settings" />
+          <MyImage
+            imageSrc={Settings}
+            imageStyle={{
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "24px",
+            }}
+          />
         </HeaderButton>
 
         <HeaderButton title="Журнал">
-          <SvgSelector name="assignment" />
+          <MyImage
+            imageSrc={Assignment}
+            imageStyle={{
+              backgroundRepeat: "no-repeat",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              height: "24px",
+            }}
+          />
         </HeaderButton>
       </div>
     </header>

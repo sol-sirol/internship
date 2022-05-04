@@ -1,5 +1,9 @@
 import { useState } from "react";
 import SvgSelector from "../../assets/images";
+import MyImage from "./MyImage";
+
+import Checked from "../../assets/images/checkbox/checked.svg";
+import UnChecked from "../../assets/images/checkbox/unchecked.svg";
 
 const StatusInput = (props) => {
   const [checked, setChecked] = useState(props.checked);
@@ -18,20 +22,26 @@ const StatusInput = (props) => {
           for={props.id}
         >
           <span>
-            <SvgSelector
-              name="checked"
-              className="status-selection__svg_checked"
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
+            <MyImage
+              checkBoxClass="status-selection__svg_checked"
+              imageSrc={Checked}
+              imageStyle={{
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                height: "24px",
+              }}
             />
             <></>
-            <SvgSelector
-              name="unchecked"
-              className="status-selection__svg_unchecked"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
+            <MyImage
+              checkBoxClass="status-selection__svg_unchecked"
+              imageSrc={UnChecked}
+              imageStyle={{
+                backgroundRepeat: "no-repeat",
+                backgroundSize: "contain",
+                backgroundPosition: "center",
+                height: "24px",
+              }}
             />
           </span>
           {props.content}
