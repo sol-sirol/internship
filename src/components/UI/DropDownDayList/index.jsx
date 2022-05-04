@@ -55,16 +55,7 @@ export const DropDownDayList = (props) => {
     >
       Завтра, 4 февраля (понедельник)
       <span>
-        <MyImage
-          imageSrc={ArrowDropDown}
-          imageStyle={{
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-            height: "11px",
-            width: "11px",
-          }}
-        />
+        <MyImage height="11px" width="11px" imageSrc={ArrowDropDown} />
       </span>
       <div className={`day-selection ${openness ? "_active_drop" : ""}`}>
         <div className="day-selection__wrapper">

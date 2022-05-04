@@ -14,61 +14,21 @@ const MyAside = () => {
         <div className="aside-bar__top">
           <AsideItem>17.22</AsideItem>
           <AsideItem>
-            <MyImage
-              imageSrc={Notifications}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "26px",
-              }}
-            />
+            <MyImage height="26px" imageSrc={Notifications} />
           </AsideItem>
         </div>
         <div className="aside-bar__bottom">
           <AsideItem>
-            <MyImage
-              imageSrc={Vector}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "32px",
-              }}
-            />
+            <MyImage height="32px" imageSrc={Vector} />
           </AsideItem>
           <AsideItem>
-            <MyImage
-              imageSrc={WbSunny}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "30px",
-              }}
-            />
+            <MyImage height="30px" imageSrc={WbSunny} />
           </AsideItem>
           <AsideItem>
-            <MyImage
-              imageSrc={Wifi}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "21px",
-              }}
-            />
+            <MyImage height="21px" imageSrc={Wifi} />
           </AsideItem>
           <AsideItem>
-            <MyImage
-              imageSrc={BatteryFull}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "27px",
-              }}
-            />
+            <MyImage height="27px" imageSrc={BatteryFull} />
           </AsideItem>
         </div>
       </div>

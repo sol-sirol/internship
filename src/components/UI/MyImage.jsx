@@ -1,10 +1,12 @@
-const MyImage = ({ imageSrc, imageStyle, addedClass }) => {
+const MyImage = ({ imageSrc, imageStyle, addedClass, width, height }) => {
   const style = {
-    ...imageStyle,
+    width,
+    height,
     backgroundImage: "url(" + imageSrc + ")",
+    ...imageStyle,
   };
 
-  return <div className={"bg-svg" + " " + addedClass} style={style}></div>;
+  return <div className={"bg-image" + " " + addedClass} style={style}></div>;
 };
 
 export default MyImage;

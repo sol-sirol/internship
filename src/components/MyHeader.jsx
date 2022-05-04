@@ -19,80 +19,32 @@ const MyHeader = () => {
           title="Новый резерв"
         >
           <div className="header__logo">
-            <MyImage
-              imageSrc={Label}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "14px",
-              }}
-            />
+            <MyImage height="14px" imageSrc={Label} />
           </div>
         </button>
 
         <DropDownDayList />
 
         <HeaderButton title="Календарь">
-          <MyImage
-            imageSrc={DateRange}
-            imageStyle={{
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              height: "24px",
-            }}
-          />
+          <MyImage height="24px" imageSrc={DateRange} />
         </HeaderButton>
 
         <DropDownStatusList />
 
         <HeaderButton title="ХЗ, честно сказать">
-          <MyImage
-            imageSrc={MapUnfold}
-            imageStyle={{
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              height: "24px",
-            }}
-          />
+          <MyImage height="24px" imageSrc={MapUnfold} />
         </HeaderButton>
 
         <HeaderButton title="Поиск">
-          <MyImage
-            imageSrc={Search}
-            imageStyle={{
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              height: "24px",
-            }}
-          />
+          <MyImage height="24px" imageSrc={Search} />
         </HeaderButton>
 
         <HeaderButton title="Настройки">
-          <MyImage
-            imageSrc={Settings}
-            imageStyle={{
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              height: "24px",
-            }}
-          />
+          <MyImage height="24px" imageSrc={Settings} />
         </HeaderButton>
 
         <HeaderButton title="Журнал">
-          <MyImage
-            imageSrc={Assignment}
-            imageStyle={{
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              height: "24px",
-            }}
-          />
+          <MyImage height="24px" imageSrc={Assignment} />
         </HeaderButton>
       </div>
     </header>

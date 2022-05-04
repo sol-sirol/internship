@@ -17,74 +17,25 @@ const OrderSheet = (props) => {
           <SheetSection
             top={props.data.persons}
             bottom={props.data.reservationTime}
-            iconTo={
-              <MyImage
-                imageSrc={Group}
-                imageStyle={{
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
-                  backgroundPosition: "center",
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
-            }
+            iconTo={<MyImage height="24px" width="24px" imageSrc={Group} />}
             iconBottom={
-              <MyImage
-                imageSrc={Schedule}
-                imageStyle={{
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
-                  backgroundPosition: "center",
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
+              <MyImage height="24px" width="24px" imageSrc={Schedule} />
             }
           />
           <SheetSection
             top={props.data.customer}
             bottom={props.data.phoneCustomer}
             iconTo={
-              <MyImage
-                imageSrc={AccountBox}
-                imageStyle={{
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
-                  backgroundPosition: "center",
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
+              <MyImage height="24px" width="24px" imageSrc={AccountBox} />
             }
             iconBottom={
-              <MyImage
-                imageSrc={LocalPhone}
-                imageStyle={{
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
-                  backgroundPosition: "center",
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
+              <MyImage height="24px" width="24px" imageSrc={LocalPhone} />
             }
           />
           <SheetSection
             top={props.data.place}
             bottom={null}
-            iconTo={
-              <MyImage
-                imageSrc={Table}
-                imageStyle={{
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "contain",
-                  backgroundPosition: "center",
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
-            }
+            iconTo={<MyImage height="24px" width="24px" imageSrc={Table} />}
           />
           <SheetSection
             top={props.data.created}
@@ -92,16 +43,7 @@ const OrderSheet = (props) => {
             bottom={null}
           />
           <button className="sheet__section" title="Изменить">
-            <MyImage
-              imageSrc={BorderColor}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "24px",
-                width: "24px",
-              }}
-            />
+            <MyImage height="24px" width="24px" imageSrc={BorderColor} />
           </button>
         </div>
       </div>

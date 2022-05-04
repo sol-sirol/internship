@@ -74,6 +74,9 @@ h6 {
   font-weight: inherit;
 }
 /*--------------------*/
-.bg-svg {
+.bg-image {
   width: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }

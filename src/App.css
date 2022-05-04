@@ -414,10 +414,10 @@ body {
   display: flex;
   align-items: center;
 }
-.sheet__section-top .bg-svg {
+.sheet__section-top .bg-image {
   margin-right: 8px;
 }
-.sheet__section-bottom .bg-svg {
+.sheet__section-bottom .bg-image {
   margin-right: 8px;
 }
 /* footer ========================================= */

@@ -23,24 +23,14 @@ const StatusInput = (props) => {
           <span>
             <MyImage
               addedClass="status-selection__svg_checked"
+              height="24px"
               imageSrc={Checked}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "24px",
-              }}
             />
             <></>
             <MyImage
+              height="24px"
               addedClass="status-selection__svg_unchecked"
               imageSrc={UnChecked}
-              imageStyle={{
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-                backgroundPosition: "center",
-                height: "24px",
-              }}
             />
           </span>
           {props.content}
