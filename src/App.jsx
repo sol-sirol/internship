@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import MyAside from "./components/MyAside";
 import MyFooter from "./components/MyFooter";
@@ -5,7 +6,25 @@ import MyHeader from "./components/MyHeader";
 import OrderSheet from "./components/OrderSheet";
 
 function App() {
-  const OrderSheetItems = [
+  const [reservesList, setReservesList] = useState([
+    {
+      id: 6,
+      time: "17.23",
+      status: "Ожидане",
+
+      persons: 4,
+      reservationTime: "11.00",
+
+      customer: "Артём",
+      phoneCustomer: "+7 (916) 444-66-33",
+
+      place: "Основной зал, №11",
+
+      created: "03.02.2019 14:16",
+    },
+  ]);
+
+  const orderSheetItems = [
     {
       id: 1,
       time: "17.22",
@@ -97,11 +116,63 @@ function App() {
       created: "03.02.2019 14:16",
     },
   ];
+
+  function createReserve() {
+    const tm = [
+      ...reservesList,
+      {
+        id:
+          Math.random().toString(16).slice(2) +
+          new Date().getTime().toString(36),
+        time: "155.23",
+        status: "Ожидане",
+
+        persons: 4,
+        reservationTime: "11.00",
+
+        customer: "Артём",
+        phoneCustomer: "+7 (916) 444-66-33",
+
+        place: "Основной зал, №11",
+
+        created: "03.02.2019 14:16",
+      },
+    ];
+    setReservesList(tm);
+  }
+
+  // function updateReserve(id, data) {
+  //   const tm = reservesList.map((e) => {
+  //     if (e.id == id) {
+  //       console.log(55555555555555, e);
+  //       e.phoneCustomer = data.phoneCustomer;
+  //     }
+  //   });
+  //   console.log(tm);
+  //   setReservesList(tm);
+  // }
+
+  function updateReserve(id, data) {
+    const tm = reservesList.map((e) => {
+      if (e.id == id) {
+        return { ...data };
+      } else {
+        return { ...e };
+      }
+    });
+    setReservesList(tm);
+  }
+
+  function removeReserve(id) {
+    const tm = reservesList.filter((e) => e.id !== id);
+    setReservesList(tm);
+  }
+
   return (
     <div className="App">
       <div className="wrapper">
         <div className="wrapper__container container">
-          <MyHeader />
+          <MyHeader createReserve={createReserve} />
           <main className="main">
             <MyAside />
             <div className="content">
@@ -111,8 +182,13 @@ function App() {
                     <div className="order-sheet__wrapper">
                       <div className="order-sheet__container">
                         <div className="order-sheet__body">
-                          {OrderSheetItems.map((el) => (
-                            <OrderSheet data={el} key={el.id} />
+                          {reservesList.map((el) => (
+                            <OrderSheet
+                              removeReserve={removeReserve}
+                              updateReserve={updateReserve}
+                              data={el}
+                              key={el.id}
+                            />
                           ))}
                         </div>
                       </div>

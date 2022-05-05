@@ -80,3 +80,15 @@ h6 {
   background-size: contain;
   background-position: center;
 }
+.myInput {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  padding: 5px 20px;
+  width: 100%;
+  border: 1px solid #555;
+}
+.myInput:focus {
+  background-color: rgb(198, 226, 235);
+  border: 1px solid #555;
+}

@@ -10,11 +10,12 @@ import MapUnfold from "../assets/images/header/map-unfold.svg";
 import Settings from "../assets/images/header/settings.svg";
 import Assignment from "../assets/images/header/assignment.svg";
 
-const MyHeader = () => {
+const MyHeader = ({ createReserve }) => {
   return (
     <header className="header">
       <div className="header__body">
         <button
+          onClick={() => createReserve()}
           className="header__button header__button_green"
           title="Новый резерв"
         >
