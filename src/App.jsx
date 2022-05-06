@@ -12,6 +12,19 @@ function App() {
       time: "17.23",
       status: "Ожидане",
 
+      // newStatus: [
+      //   {
+      //     id: null,
+      //     value: "Ожидание",
+      //     selected: false,
+      //   },
+      //   {
+      //     id: null,
+      //     value: null,
+      //     selected: false,
+      //   },
+      // ],
+
       persons: 4,
       reservationTime: "11.00",
 
@@ -21,140 +34,37 @@ function App() {
       place: "Основной зал, №11",
 
       created: "03.02.2019 14:16",
+
+      edited: false,
     },
   ]);
 
-  const orderSheetItems = [
-    {
-      id: 1,
-      time: "17.22",
-      status: "Ожидане",
-
-      persons: 5,
-      reservationTime: "10.00",
-
-      customer: "Денис",
-      phoneCustomer: "+7 (916) 333-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-    {
-      id: 2,
-      time: "17.23",
-      status: "Ожидане",
-
-      persons: 4,
-      reservationTime: "11.00",
-
-      customer: "Артём",
-      phoneCustomer: "+7 (916) 444-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-    {
-      id: 3,
-      time: "17.22",
-      status: "Ожидане",
-
-      persons: 5,
-      reservationTime: "10.00",
-
-      customer: "Денис",
-      phoneCustomer: "+7 (916) 333-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-    {
-      id: 4,
-      time: "17.23",
-      status: "Ожидане",
-
-      persons: 4,
-      reservationTime: "11.00",
-
-      customer: "Артём",
-      phoneCustomer: "+7 (916) 444-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-    {
-      id: 5,
-      time: "17.22",
-      status: "Ожидане",
-
-      persons: 5,
-      reservationTime: "10.00",
-
-      customer: "Денис",
-      phoneCustomer: "+7 (916) 333-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-    {
-      id: 6,
-      time: "17.23",
-      status: "Ожидане",
-
-      persons: 4,
-      reservationTime: "11.00",
-
-      customer: "Артём",
-      phoneCustomer: "+7 (916) 444-66-33",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-    },
-  ];
-
   function createReserve() {
-    const tm = [
-      ...reservesList,
-      {
-        id:
-          Math.random().toString(16).slice(2) +
-          new Date().getTime().toString(36),
-        time: "155.23",
-        status: "Ожидане",
+    const tm = [...reservesList];
+    tm.unshift({
+      id:
+        Math.random().toString(16).slice(2) + new Date().getTime().toString(36),
+      time: 17.55,
+      status: "Ожидане",
 
-        persons: 4,
-        reservationTime: "11.00",
+      persons: 4,
+      reservationTime: "11.00",
 
-        customer: "Артём",
-        phoneCustomer: "+7 (916) 444-66-33",
+      customer: null,
+      phoneCustomer: null,
 
-        place: "Основной зал, №11",
+      place: null,
 
-        created: "03.02.2019 14:16",
-      },
-    ];
+      created: "03.02.2019 14:16",
+
+      edited: true,
+    });
     setReservesList(tm);
   }
 
-  // function updateReserve(id, data) {
-  //   const tm = reservesList.map((e) => {
-  //     if (e.id == id) {
-  //       console.log(55555555555555, e);
-  //       e.phoneCustomer = data.phoneCustomer;
-  //     }
-  //   });
-  //   console.log(tm);
-  //   setReservesList(tm);
-  // }
-
   function updateReserve(id, data) {
     const tm = reservesList.map((e) => {
-      if (e.id == id) {
+      if (e.id === id) {
         return { ...data };
       } else {
         return { ...e };

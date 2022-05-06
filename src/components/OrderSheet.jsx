@@ -7,18 +7,59 @@ import AccountBox from "../assets/images/sheet/account_box.svg";
 import LocalPhone from "../assets/images/sheet/local_phone.svg";
 import Table from "../assets/images/sheet/table.svg";
 import BorderColor from "../assets/images/sheet/border_color.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
+  const [editMode, seteditMode] = useState(data.edited);
+
   const [reserve, setReserve] = useState({ ...data });
 
-  const [editMode, seteditMode] = useState(false);
+  const [arreySelected, setArreySelected] = useState([
+    { selected: false, value: "Ожидание" },
+    { selected: false, value: "Пришёл" },
+    { selected: false, value: "Ушёл" },
+    { selected: false, value: "Не пришёл" },
+  ]);
+
+  // const ff = () => {
+  //   const tm = arreySelected.map((item) => {
+  //     if (item.value === data.status) {
+  //       return {
+  //         ...item,
+  //         status: true,
+  //       };
+  //     }
+  //   });
+  //   setArreySelected(tm);
+  // };
+
+  const setStatus = (e) => {
+    setReserve({
+      ...reserve,
+      status: e.target.options[e.target.selectedIndex].value,
+    });
+  };
 
   return (
     <div className="sheet">
       <div className="sheet__wrapper">
         <div className="sheet__body">
-          <SheetSection top={data.time} bottom={data.status} />
+          <SheetSection
+            top={data.time}
+            bottom={
+              !editMode ? (
+                data.status
+              ) : (
+                <select onChange={(e) => setStatus(e)}>
+                  {arreySelected.map((item) => (
+                    <option selected={item.selected} value={item.value}>
+                      {item.value}
+                    </option>
+                  ))}
+                </select>
+              )
+            }
+          />
           <SheetSection
             top={data.persons}
             bottom={data.reservationTime}
@@ -28,8 +69,34 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             }
           />
           <SheetSection
-            top={data.customer}
-            bottom={data.phoneCustomer}
+            top={
+              !editMode ? (
+                data.customer
+              ) : (
+                <input
+                  value={reserve.customer}
+                  onChange={(e) => {
+                    setReserve({ ...reserve, customer: e.target.value });
+                  }}
+                  className="myInput"
+                  type="text"
+                />
+              )
+            }
+            bottom={
+              !editMode ? (
+                data.phoneCustomer
+              ) : (
+                <input
+                  value={reserve.phoneCustomer}
+                  onChange={(e) => {
+                    setReserve({ ...reserve, phoneCustomer: e.target.value });
+                  }}
+                  className="myInput"
+                  type="text"
+                />
+              )
+            }
             iconTo={
               <MyImage height="24px" width="24px" imageSrc={AccountBox} />
             }
@@ -38,7 +105,20 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             }
           />
           <SheetSection
-            top={data.place}
+            top={
+              !editMode ? (
+                data.place
+              ) : (
+                <input
+                  value={reserve.place}
+                  onChange={(e) => {
+                    setReserve({ ...reserve, place: e.target.value });
+                  }}
+                  className="myInput"
+                  type="text"
+                />
+              )
+            }
             bottom={null}
             iconTo={<MyImage height="24px" width="24px" imageSrc={Table} />}
           />
@@ -76,14 +156,6 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
               >
                 Удалить
               </button>
-              <input
-                value={reserve.customer}
-                onChange={(e) => {
-                  setReserve({ ...reserve, customer: e.target.value });
-                }}
-                className="myInput"
-                type="text"
-              />
             </>
           )}
         </div>
