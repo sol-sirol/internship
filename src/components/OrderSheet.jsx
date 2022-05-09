@@ -1,4 +1,6 @@
 import SheetSection from "./SheetSection";
+import { useEffect, useState, useRef } from "react";
+import InputMask from "react-input-mask";
 import MyImage from "./UI/MyImage";
 
 import Group from "../assets/images/sheet/group.svg";
@@ -7,41 +9,52 @@ import AccountBox from "../assets/images/sheet/account_box.svg";
 import LocalPhone from "../assets/images/sheet/local_phone.svg";
 import Table from "../assets/images/sheet/table.svg";
 import BorderColor from "../assets/images/sheet/border_color.svg";
-import { useEffect, useState } from "react";
+import CheckMark from "../assets/images/sheet/check_mark.svg";
+import Basket from "../assets/images/sheet/basket.svg";
+
+const STATUSES = [
+  { value: "Ожидание" },
+  { value: "Пришёл" },
+  { value: "Ушёл" },
+  { value: "Не пришёл" },
+];
 
 const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
   const [editMode, seteditMode] = useState(data.edited);
 
   const [reserve, setReserve] = useState({ ...data });
 
-  const [arreySelected, setArreySelected] = useState([
-    { selected: false, value: "Ожидание" },
-    { selected: false, value: "Пришёл" },
-    { selected: false, value: "Ушёл" },
-    { selected: false, value: "Не пришёл" },
-  ]);
+  const [statusSelected, setStatusSelected] = useState("Ожидание");
 
-  // const ff = () => {
-  //   const tm = arreySelected.map((item) => {
-  //     if (item.value === data.status) {
-  //       return {
-  //         ...item,
-  //         status: true,
-  //       };
-  //     }
-  //   });
-  //   setArreySelected(tm);
-  // };
+  const personsRef = useRef(null);
 
-  const setStatus = (e) => {
+  useEffect(() => {
+    if (editMode) {
+      personsRef?.current?.focus();
+    }
+  }, [editMode]);
+
+  useEffect(() => {
     setReserve({
       ...reserve,
-      status: e.target.options[e.target.selectedIndex].value,
+      status: statusSelected,
     });
+  }, [statusSelected]);
+
+  const convertedPhone = (phone) => {
+    const convertedPhoneCustomer = phone?.split("");
+
+    convertedPhoneCustomer?.splice(0, 0, "+");
+    convertedPhoneCustomer?.splice(2, 0, " (");
+    convertedPhoneCustomer?.splice(6, 0, ") ");
+    convertedPhoneCustomer?.splice(10, 0, "-");
+    convertedPhoneCustomer?.splice(13, 0, "-");
+
+    return convertedPhoneCustomer;
   };
 
   return (
-    <div className="sheet">
+    <div className={"sheet" + (editMode && " " + "sheet_update")}>
       <div className="sheet__wrapper">
         <div className="sheet__body">
           <SheetSection
@@ -50,9 +63,13 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
               !editMode ? (
                 data.status
               ) : (
-                <select onChange={(e) => setStatus(e)}>
-                  {arreySelected.map((item) => (
-                    <option selected={item.selected} value={item.value}>
+                <select onChange={(e) => setStatusSelected(e.target.value)}>
+                  {STATUSES.map((item) => (
+                    <option
+                      key={item.value}
+                      selected={statusSelected == item.value}
+                      value={item.value}
+                    >
                       {item.value}
                     </option>
                   ))}
@@ -61,8 +78,35 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             }
           />
           <SheetSection
-            top={data.persons}
-            bottom={data.reservationTime}
+            top={
+              !editMode ? (
+                data.persons
+              ) : (
+                <input
+                  ref={personsRef}
+                  value={reserve.persons}
+                  onChange={(e) => {
+                    setReserve({ ...reserve, persons: e.target.value });
+                  }}
+                  className="myInput"
+                  type="number"
+                />
+              )
+            }
+            bottom={
+              !editMode ? (
+                data.reservationTime
+              ) : (
+                <input
+                  value={reserve.reservationTime}
+                  onChange={(e) => {
+                    setReserve({ ...reserve, reservationTime: e.target.value });
+                  }}
+                  className="myInput"
+                  type="time"
+                />
+              )
+            }
             iconTo={<MyImage height="24px" width="24px" imageSrc={Group} />}
             iconBottom={
               <MyImage height="24px" width="24px" imageSrc={Schedule} />
@@ -85,15 +129,18 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             }
             bottom={
               !editMode ? (
-                data.phoneCustomer
+                convertedPhone(data.phoneCustomer)
               ) : (
-                <input
-                  value={reserve.phoneCustomer}
+                <InputMask
+                  mask="+7 (999) 999-99-99"
                   onChange={(e) => {
-                    setReserve({ ...reserve, phoneCustomer: e.target.value });
+                    setReserve({
+                      ...reserve,
+                      phoneCustomer: e.target.value.replace(/[^\d]/g, ""),
+                    });
                   }}
+                  value={reserve.phoneCustomer}
                   className="myInput"
-                  type="text"
                 />
               )
             }
@@ -128,7 +175,6 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             <button
               onClick={() => {
                 seteditMode(!editMode);
-                console.log(55454545, editMode);
               }}
               className="sheet__section"
               title="Изменить"
@@ -136,27 +182,27 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
               <MyImage height="24px" width="24px" imageSrc={BorderColor} />
             </button>
           ) : (
-            <>
-              <button
+            <div className="sheet__section">
+              <div
                 onClick={() => {
                   updateReserve(data.id, reserve);
                   seteditMode(!editMode);
                 }}
-                className="sheet__section"
+                className="sheet__button_checkMark"
                 title="Изменить"
               >
-                Изменить
-              </button>
-              <button
+                <MyImage height="24px" width="24px" imageSrc={CheckMark} />
+              </div>
+              <div
                 onClick={() => {
                   removeReserve(data.id);
                 }}
-                className="sheet__section"
-                title="Изменить"
+                className="sheet__button_basket"
+                title="Удалить"
               >
-                Удалить
-              </button>
-            </>
+                <MyImage height="24px" width="24px" imageSrc={Basket} />
+              </div>
+            </div>
           )}
         </div>
       </div>

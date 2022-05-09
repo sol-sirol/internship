@@ -4,6 +4,7 @@ import MyAside from "./components/MyAside";
 import MyFooter from "./components/MyFooter";
 import MyHeader from "./components/MyHeader";
 import OrderSheet from "./components/OrderSheet";
+import moment from "moment";
 
 function App() {
   const [reservesList, setReservesList] = useState([
@@ -12,24 +13,12 @@ function App() {
       time: "17.23",
       status: "Ожидане",
 
-      // newStatus: [
-      //   {
-      //     id: null,
-      //     value: "Ожидание",
-      //     selected: false,
-      //   },
-      //   {
-      //     id: null,
-      //     value: null,
-      //     selected: false,
-      //   },
-      // ],
-
       persons: 4,
-      reservationTime: "11.00",
+      reservationTime: "11:00",
 
       customer: "Артём",
-      phoneCustomer: "+7 (916) 444-66-33",
+      // phoneCustomer: "+7 (916) 444-66-33",
+      phoneCustomer: "79164446633",
 
       place: "Основной зал, №11",
 
@@ -48,14 +37,14 @@ function App() {
       status: "Ожидане",
 
       persons: 4,
-      reservationTime: "11.00",
+      reservationTime: "11:00",
 
       customer: null,
       phoneCustomer: null,
 
-      place: null,
+      place: "Основной зал, №11",
 
-      created: "03.02.2019 14:16",
+      created: moment().format("MM.DD.YYYY HH:mm"),
 
       edited: true,
     });

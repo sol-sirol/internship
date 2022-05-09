@@ -349,6 +349,7 @@ body {
 
 .sheet__section {
   background-color: #fff;
+  line-height: 120%;
 }
 .sheet__section:not(:last-child) {
   border-right: 1px solid #e0e0e0;
@@ -378,7 +379,7 @@ body {
   letter-spacing: 0.16px;
 }
 .sheet__section:nth-child(2) {
-  flex: 1 1 141px;
+  flex: 1 1 157px;
   padding: 28px 0 23px 34px;
 }
 .sheet__section:nth-child(2) .sheet__section-bottom {
@@ -420,6 +421,54 @@ body {
 .sheet__section-bottom .bg-image {
   margin-right: 8px;
 }
+
+/* sheet_update */
+.sheet.sheet_update .sheet__section:last-child:hover {
+  background-color: #fff;
+}
+.sheet.sheet_update .sheet__button_checkMark {
+  margin: 2px;
+  padding: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.sheet.sheet_update .sheet__button_basket {
+  margin: 2px;
+  padding: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.sheet.sheet_update .sheet__button_checkMark:hover {
+  background-color: rgb(201, 247, 195);
+}
+.sheet.sheet_update .sheet__button_basket:hover {
+  background-color: rgb(252, 177, 177);
+}
+
+.sheet.sheet_update .sheet__section:nth-child(2) {
+  padding: 28px;
+}
+.sheet.sheet_update .sheet__section:nth-child(2) .sheet__section-bottom {
+  padding-top: 11px;
+}
+.sheet.sheet_update .sheet__section:nth-child(3) {
+  padding: 28px;
+}
+.sheet.sheet_update .sheet__section:nth-child(3) .sheet__section-bottom {
+  padding-top: 11px;
+}
+.sheet.sheet_update .sheet__section:nth-child(4) {
+  padding: 28px;
+}
+.sheet.sheet_update .sheet__section:nth-child(5) {
+  padding: 28px;
+}
+
+.sheet.sheet_update .myInput:focus {
+  background-color: rgb(228, 253, 224);
+}
+/* sheet_update */
+
 /* footer ========================================= */
 .footer {
   margin-top: auto;
