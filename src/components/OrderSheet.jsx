@@ -54,7 +54,7 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
   };
 
   return (
-    <div className={"sheet" + (editMode && " " + "sheet_update")}>
+    <div className={"sheet" + (editMode ? " " + "sheet_update" : "")}>
       <div className="sheet__wrapper">
         <div className="sheet__body">
           <SheetSection
