@@ -4,74 +4,16 @@ import MyAside from "./components/MyAside";
 import MyFooter from "./components/MyFooter";
 import MyHeader from "./components/MyHeader";
 import OrderSheet from "./components/OrderSheet";
-import moment from "moment";
 
-function App() {
-  const [reservesList, setReservesList] = useState([
-    {
-      id: 6,
-      time: "17.23",
-      status: "Ожидане",
+import Reserves from "./store/Reserves";
+import { observer } from "mobx-react-lite";
 
-      persons: 4,
-      reservationTime: "11:00",
-
-      customer: "Артём",
-      // phoneCustomer: "+7 (916) 444-66-33",
-      phoneCustomer: "79164446633",
-
-      place: "Основной зал, №11",
-
-      created: "03.02.2019 14:16",
-
-      edited: false,
-    },
-  ]);
-
-  function createReserve() {
-    const tm = [...reservesList];
-    tm.unshift({
-      id:
-        Math.random().toString(16).slice(2) + new Date().getTime().toString(36),
-      time: 17.55,
-      status: "Ожидане",
-
-      persons: 4,
-      reservationTime: "11:00",
-
-      customer: null,
-      phoneCustomer: null,
-
-      place: "Основной зал, №11",
-
-      created: moment().format("MM.DD.YYYY HH:mm"),
-
-      edited: true,
-    });
-    setReservesList(tm);
-  }
-
-  function updateReserve(id, data) {
-    const tm = reservesList.map((e) => {
-      if (e.id === id) {
-        return { ...data };
-      } else {
-        return { ...e };
-      }
-    });
-    setReservesList(tm);
-  }
-
-  function removeReserve(id) {
-    const tm = reservesList.filter((e) => e.id !== id);
-    setReservesList(tm);
-  }
-
+const App = observer(() => {
   return (
     <div className="App">
       <div className="wrapper">
         <div className="wrapper__container container">
-          <MyHeader createReserve={createReserve} />
+          <MyHeader createReserve={Reserves.createReserve} />
           <main className="main">
             <MyAside />
             <div className="content">
@@ -81,10 +23,10 @@ function App() {
                     <div className="order-sheet__wrapper">
                       <div className="order-sheet__container">
                         <div className="order-sheet__body">
-                          {reservesList.map((el) => (
+                          {Reserves.reservesList.map((el) => (
                             <OrderSheet
-                              removeReserve={removeReserve}
-                              updateReserve={updateReserve}
+                              removeReserve={Reserves.removeReserve}
+                              updateReserve={Reserves.updateReserve}
                               data={el}
                               key={el.id}
                             />
@@ -102,6 +44,6 @@ function App() {
       </div>
     </div>
   );
-}
+});
 
 export default App;
