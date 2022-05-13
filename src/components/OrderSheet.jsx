@@ -193,6 +193,17 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
             <div className="sheet__section">
               <div
                 onClick={() => {
+                  if (
+                    !(
+                      reserve.name &&
+                      reserve.persons &&
+                      reserve.phone &&
+                      reserve.room
+                    )
+                  ) {
+                    alert("Заполните все поля");
+                    return;
+                  }
                   updateReserve(data._id, reserve);
                   seteditMode(!editMode);
                 }}
