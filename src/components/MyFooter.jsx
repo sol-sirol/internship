@@ -6,7 +6,7 @@ const MyFooter = () => {
       <div className="footer__wrapper">
         <div className="footer__container">
           <div className="footer__body">
-            Общее количество резервов: {Reserves.numberReserves}(10). Всего
+            Общее количество резервов: {Reserves.numberReserves}(25). Всего
             гостей: {Reserves.numberGuests}(18)
           </div>
         </div>

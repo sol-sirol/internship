@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./App.css";
 import MyAside from "./components/MyAside";
 import MyFooter from "./components/MyFooter";
@@ -28,7 +27,7 @@ const App = observer(() => {
                               removeReserve={Reserves.removeReserve}
                               updateReserve={Reserves.updateReserve}
                               data={el}
-                              key={el.id}
+                              key={el._id}
                             />
                           ))}
                         </div>
