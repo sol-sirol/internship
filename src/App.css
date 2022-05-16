@@ -11,6 +11,11 @@ body {
   line-height: 20px;
   font-family: "Roboto", sans-serif;
 }
+
+body .App {
+  font-family: "Roboto", sans-serif;
+}
+
 .wrapper {
   min-height: 100vh;
   background-color: #161b1e;
@@ -266,6 +271,7 @@ body {
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
+  color: #fff;
 }
 
 .aside-bar__top {
@@ -415,12 +421,6 @@ body {
   display: flex;
   align-items: center;
 }
-.sheet__section-top .bg-image {
-  margin-right: 8px;
-}
-.sheet__section-bottom .bg-image {
-  margin-right: 8px;
-}
 
 /* sheet_update */
 .sheet.sheet_update .sheet__section:last-child:hover {
@@ -431,6 +431,10 @@ body {
   padding: 5px;
   transition: all 0.3s;
   cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .sheet.sheet_update .sheet__button_basket {
   margin: 2px;
@@ -464,8 +468,14 @@ body {
   padding: 28px;
 }
 
+.sheet.sheet_update .myInput {
+  border: 1px solid #d7d7d7;
+  padding: 5px;
+  border-radius: 2px;
+}
 .sheet.sheet_update .myInput:focus {
-  background-color: rgb(228, 253, 224);
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  padding: 5px;
 }
 /* sheet_update */
 
@@ -490,3 +500,7 @@ body {
 }
 
 /* footer ========================================= */
+.sheet__section.sheet__section_button {
+  height: 110px;
+  border: none;
+}

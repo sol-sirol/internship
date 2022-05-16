@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import InputMask from "react-input-mask";
 import MyImage from "./UI/MyImage";
 import moment from "moment";
+import { Button, Input, InputNumber, TimePicker, notification } from "antd";
 
 import Group from "../assets/images/sheet/group.svg";
 import Schedule from "../assets/images/sheet/schedule.svg";
@@ -13,12 +14,16 @@ import BorderColor from "../assets/images/sheet/border_color.svg";
 import CheckMark from "../assets/images/sheet/check_mark.svg";
 import Basket from "../assets/images/sheet/basket.svg";
 
-const STATUSES = [
-  { value: "Ожидание" },
-  { value: "Пришёл" },
-  { value: "Ушёл" },
-  { value: "Не пришёл" },
-];
+const emptyPlaylistError = () => {
+  notification.error({
+    message: "Ошибка",
+    description: "Заполните все поля",
+    placement: "top",
+    onClick: () => {
+      console.log("Ошибка! Заполните все поля.");
+    },
+  });
+};
 
 const OrderSheet = ({
   data,
@@ -57,7 +62,9 @@ const OrderSheet = ({
     convertedPhone?.splice(10, 0, "-");
     convertedPhone?.splice(13, 0, "-");
 
-    return convertedPhone;
+    const ff = convertedPhone.join("");
+
+    return ff;
   };
 
   return (
@@ -70,11 +77,12 @@ const OrderSheet = ({
               !editMode ? (
                 data.persons
               ) : (
-                <input
-                  ref={personsRef}
+                <InputNumber
+                  //ref={personsRef}
+                  autoFocus
                   value={reserve.persons}
-                  onChange={(e) => {
-                    setReserve({ ...reserve, persons: e.target.value });
+                  onChange={(number) => {
+                    setReserve({ ...reserve, persons: number });
                   }}
                   className="myInput"
                   type="number"
@@ -85,10 +93,16 @@ const OrderSheet = ({
               !editMode ? (
                 data.time
               ) : (
-                <input
-                  value={reserve.time}
-                  onChange={(e) => {
-                    setReserve({ ...reserve, time: e.target.value });
+                <TimePicker
+                  minuteStep={5}
+                  format={"HH:mm"}
+                  allowClear={false}
+                  value={moment(reserve.time, "HH:mm")}
+                  onChange={(newTime) => {
+                    setReserve({
+                      ...reserve,
+                      time: moment(newTime, "HH:mm:ss").format("HH:mm"),
+                    });
                   }}
                   className="myInput"
                   type="time"
@@ -105,7 +119,7 @@ const OrderSheet = ({
               !editMode ? (
                 data.name
               ) : (
-                <input
+                <Input
                   value={reserve.name}
                   onChange={(e) => {
                     setReserve({ ...reserve, name: e.target.value });
@@ -144,7 +158,7 @@ const OrderSheet = ({
               !editMode ? (
                 "Основной зал, " + data.room
               ) : (
-                <input
+                <Input
                   value={reserve.room}
                   onChange={(e) => {
                     setReserve({ ...reserve, room: e.target.value });
@@ -166,18 +180,18 @@ const OrderSheet = ({
           />
 
           {!editMode ? (
-            <button
+            <Button
               onClick={() => {
                 seteditMode(!editMode);
               }}
-              className="sheet__section"
+              className="sheet__section sheet__section_button"
               title="Изменить"
             >
               <MyImage height="24px" width="24px" imageSrc={BorderColor} />
-            </button>
+            </Button>
           ) : (
             <div className="sheet__section">
-              <div
+              <Button
                 onClick={() => {
                   if (
                     !(
@@ -187,7 +201,7 @@ const OrderSheet = ({
                       reserve.room
                     )
                   ) {
-                    alert("Заполните все поля");
+                    emptyPlaylistError();
                     return;
                   }
 
@@ -203,8 +217,9 @@ const OrderSheet = ({
                 title="Изменить"
               >
                 <MyImage height="24px" width="24px" imageSrc={CheckMark} />
-              </div>
-              <div
+              </Button>
+              <Button
+                danger
                 onClick={() => {
                   if (reserve.ferstStap) {
                     reloadReserves();
@@ -216,7 +231,7 @@ const OrderSheet = ({
                 title="Удалить"
               >
                 <MyImage height="24px" width="24px" imageSrc={Basket} />
-              </div>
+              </Button>
             </div>
           )}
         </div>

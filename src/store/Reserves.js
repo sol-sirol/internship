@@ -7,6 +7,27 @@ import {
   deleteReserves,
 } from "../API";
 
+import { notification } from "antd";
+
+const reserveSaved = () => {
+  notification.success({
+    message: "Резерв создан",
+    placement: "top",
+  });
+};
+const reserveUpdated = () => {
+  notification.success({
+    message: "Резерв обновлён",
+    placement: "top",
+  });
+};
+const reserveRemoved = () => {
+  notification.info({
+    message: "Резерв удалён",
+    placement: "top",
+  });
+};
+
 const reserves = await getReserves();
 reserves.data.reverse();
 
@@ -42,7 +63,7 @@ class Reserves {
 
   createReserve = async (reserve) => {
     await sendReserves(reserve);
-
+    reserveSaved();
     this.reloadReserves();
   };
 
@@ -60,11 +81,14 @@ class Reserves {
 
     await changeReserves(chengedReserve);
 
+    reserveUpdated();
     this.reloadReserves();
   };
-  removeReserve = (id) => {
-    deleteReserves({ id });
 
+  removeReserve = async (id) => {
+    await deleteReserves({ id });
+
+    reserveRemoved();
     this.reloadReserves();
   };
 
