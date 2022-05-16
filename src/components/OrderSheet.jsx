@@ -20,7 +20,13 @@ const STATUSES = [
   { value: "Не пришёл" },
 ];
 
-const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
+const OrderSheet = ({
+  data,
+  removeReserve,
+  updateReserve,
+  createReserve,
+  reloadReserves,
+}) => {
   const [editMode, seteditMode] = useState(data.edited);
 
   const [reserve, setReserve] = useState({ ...data });
@@ -58,27 +64,7 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
     <div className={"sheet" + (editMode ? " " + "sheet_update" : "")}>
       <div className="sheet__wrapper">
         <div className="sheet__body">
-          <SheetSection
-            top={17.23}
-            bottom="Ожидание"
-            // bottom={
-            //   !editMode ? (
-            //     data.status
-            //   ) : (
-            //     <select onChange={(e) => setStatusSelected(e.target.value)}>
-            //       {STATUSES.map((item) => (
-            //         <option
-            //           key={item.value}
-            //           selected={statusSelected == item.value}
-            //           value={item.value}
-            //         >
-            //           {item.value}
-            //         </option>
-            //       ))}
-            //     </select>
-            //   )
-            // }
-          />
+          <SheetSection top={17.23} bottom="Ожидание" />
           <SheetSection
             top={
               !editMode ? (
@@ -204,7 +190,13 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
                     alert("Заполните все поля");
                     return;
                   }
-                  updateReserve(data._id, reserve);
+
+                  if (reserve.ferstStap) {
+                    reserve.ferstStap = false;
+                    createReserve(reserve);
+                  } else {
+                    updateReserve(data._id, reserve);
+                  }
                   seteditMode(!editMode);
                 }}
                 className="sheet__button_checkMark"
@@ -214,7 +206,11 @@ const OrderSheet = ({ data, removeReserve, updateReserve, ...props }) => {
               </div>
               <div
                 onClick={() => {
-                  removeReserve(data._id);
+                  if (reserve.ferstStap) {
+                    reloadReserves();
+                  } else {
+                    removeReserve(data._id);
+                  }
                 }}
                 className="sheet__button_basket"
                 title="Удалить"

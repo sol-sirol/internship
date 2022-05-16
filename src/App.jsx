@@ -12,7 +12,7 @@ const App = observer(() => {
     <div className="App">
       <div className="wrapper">
         <div className="wrapper__container container">
-          <MyHeader createReserve={Reserves.createReserve} />
+          <MyHeader createReserve={Reserves.createLocalReserve} />
           <main className="main">
             <MyAside />
             <div className="content">
@@ -26,6 +26,8 @@ const App = observer(() => {
                             <OrderSheet
                               removeReserve={Reserves.removeReserve}
                               updateReserve={Reserves.updateReserve}
+                              createReserve={Reserves.createReserve}
+                              reloadReserves={Reserves.reloadReserves}
                               data={el}
                               key={el._id}
                             />

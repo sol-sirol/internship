@@ -17,22 +17,33 @@ class Reserves {
     makeAutoObservable(this);
   }
 
-  createReserve = async () => {
+  reloadReserves = () => {
+    getReserves().then((reserves) => {
+      this.reservesList = reserves.data.reverse();
+    });
+  };
+
+  createLocalReserve = () => {
     const tm = [...this.reservesList];
-    const layoutNewReserve = {
+    const newReserve = {
       persons: 1,
       time: "11:00",
-      name: "name",
-      phone: "7",
+      name: "",
+      phone: "",
       room: "1",
       date: moment().format(),
       edited: true,
+      ferstStap: true,
     };
 
-    const newReserve = await sendReserves(layoutNewReserve);
-
-    tm.unshift({ ...newReserve.data, name: "", edited: true });
+    tm.unshift({ ...newReserve });
     this.reservesList = [...tm];
+  };
+
+  createReserve = async (reserve) => {
+    await sendReserves(reserve);
+
+    this.reloadReserves();
   };
 
   updateReserve = async (id, data) => {
@@ -49,22 +60,12 @@ class Reserves {
 
     await changeReserves(chengedReserve);
 
-    const tm = this.reservesList.map((e) => {
-      if (e._id === id) {
-        return { ...data };
-      } else {
-        return { ...e };
-      }
-    });
-
-    this.reservesList = [...tm];
+    this.reloadReserves();
   };
-
   removeReserve = (id) => {
     deleteReserves({ id });
-    const tm = this.reservesList.filter((e) => e._id !== id);
 
-    this.reservesList = [...tm];
+    this.reloadReserves();
   };
 
   get numberGuests() {

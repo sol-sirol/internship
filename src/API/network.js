@@ -1,4 +1,4 @@
-const API_URL = "http://188.225.56.153:3000/booking";
+const API_URL = "http://188.225.56.153:3000";
 
 export const api = {
   get: (apiMethod, params) => request(apiMethod, params, "GET"),
@@ -7,7 +7,7 @@ export const api = {
   delete: (apiMethod, params) => request(apiMethod, params, "DELETE"),
 };
 
-const request = (apiMethod = "", params = {}, method) => {
+const request = (apiMethod, params = {}, method) => {
   return new Promise((resolve, reject) => {
     const headers = new Headers({ "Content-Type": "application/json" });
     // headers.append('Content-Type', 'application/json')
