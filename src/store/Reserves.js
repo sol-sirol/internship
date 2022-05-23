@@ -1,13 +1,14 @@
 import { makeAutoObservable } from "mobx";
 import moment from "moment";
-import {
-  getReserves,
-  sendReserves,
-  changeReserves,
-  deleteReserves,
-} from "../API";
 
 import { notification } from "antd";
+
+import { GET_RESERVES } from "../query/reserves";
+import { CREATE_RESERVES } from "../mutations/createReserve";
+import { UPDATE_RESERVES } from "../mutations/updateReserve";
+import { DELETE_RESERVES } from "../mutations/deleteReserve";
+
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const reserveSaved = () => {
   notification.success({
@@ -28,20 +29,41 @@ const reserveRemoved = () => {
   });
 };
 
-const reserves = await getReserves();
-reserves.data.reverse();
-
 class Reserves {
-  reservesList = [...reserves.data];
+  client = new ApolloClient({
+    uri: "https://study.apiloc.ru/public/graphql",
+
+    cache: new InMemoryCache(),
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: "no-cache",
+      },
+      query: {
+        fetchPolicy: "no-cache",
+      },
+      mutate: {
+        fetchPolicy: "no-cache",
+      },
+    },
+  });
+
+  reservesList = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
   reloadReserves = () => {
-    getReserves().then((reserves) => {
-      this.reservesList = reserves.data.reverse();
-    });
+    this.client
+      .query({
+        query: GET_RESERVES,
+        variables: {},
+      })
+      .then((result) => {
+        console.log(4545, result);
+        this.reservesList = result.data.bookings.data;
+        this.reservesList.reverse();
+      });
   };
 
   createLocalReserve = () => {
@@ -61,35 +83,78 @@ class Reserves {
     this.reservesList = [...tm];
   };
 
-  createReserve = async (reserve) => {
-    await sendReserves(reserve);
-    reserveSaved();
-    this.reloadReserves();
-  };
-
-  updateReserve = async (id, data) => {
-    const chengedReserve = {
-      persons: data.persons,
-      time: data.time,
-      name: data.name,
-      phone: data.phone,
-      room: data.room,
-      date: data.date,
-      id: id,
-      edited: false,
+  createReserve = (reserve) => {
+    const tm = {
+      time: String(reserve.time),
+      name: String(reserve.name),
+      phone: String(reserve.phone),
+      room: String(reserve.room),
+      date: String(reserve.date),
+      persons: reserve.persons,
     };
 
-    await changeReserves(chengedReserve);
+    console.log(999, tm);
+    console.log(tm.persons);
 
-    reserveUpdated();
-    this.reloadReserves();
+    this.client
+      .mutate({
+        mutation: CREATE_RESERVES,
+        variables: {
+          entity: tm,
+        },
+      })
+      .then((result) => {
+        this.reloadReserves();
+        reserveSaved();
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
-  removeReserve = async (id) => {
-    await deleteReserves({ id });
+  updateReserve = (id, data) => {
+    console.log(id, data);
+    const chengedReserve = {
+      time: String(data.time),
+      name: String(data.name),
+      phone: String(data.phone),
+      room: String(data.room),
+      date: String(data.date),
+      persons: 4,
+    };
+    console.log(chengedReserve);
 
-    reserveRemoved();
-    this.reloadReserves();
+    this.client
+      .mutate({
+        mutation: UPDATE_RESERVES,
+        variables: {
+          id: id,
+          entity: chengedReserve,
+        },
+      })
+      .then((result) => {
+        console.log(result);
+        this.reloadReserves();
+        reserveUpdated();
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
+
+  removeReserve = (id) => {
+    console.log(id);
+    this.client
+      .mutate({
+        mutation: DELETE_RESERVES,
+        variables: {
+          id: id,
+        },
+      })
+      .then((result) => {
+        this.reloadReserves();
+        reserveSaved();
+      });
   };
 
   get numberGuests() {
@@ -99,7 +164,6 @@ class Reserves {
     });
     return tm;
   }
-
   get numberReserves() {
     return this.reservesList.length;
   }

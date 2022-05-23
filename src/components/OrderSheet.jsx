@@ -36,7 +36,14 @@ const OrderSheet = ({
 
   const [reserve, setReserve] = useState({ ...data });
 
-  const [statusSelected, setStatusSelected] = useState("Ожидание");
+  //  const [person, setPerson] = useState(1);
+
+  // console.log(reserve);
+  //console.log(person);
+
+  // useEffect(() => {
+  //   setReserve({ ...reserve, persons: person });
+  // }, [person]);
 
   const personsRef = useRef(null);
 
@@ -45,13 +52,6 @@ const OrderSheet = ({
       personsRef?.current?.focus();
     }
   }, [editMode]);
-
-  useEffect(() => {
-    setReserve({
-      ...reserve,
-      status: statusSelected,
-    });
-  }, [statusSelected]);
 
   const convertedPhone = (phone) => {
     const convertedPhone = phone?.split("");
@@ -81,8 +81,10 @@ const OrderSheet = ({
                   //ref={personsRef}
                   autoFocus
                   value={reserve.persons}
-                  onChange={(number) => {
-                    setReserve({ ...reserve, persons: number });
+                  onChange={(numberInput) => {
+                    console.log(5555, numberInput);
+                    setReserve({ ...reserve, persons: numberInput });
+                    // setPerson(numberInput);
                   }}
                   className="myInput"
                   type="number"
@@ -209,7 +211,7 @@ const OrderSheet = ({
                     reserve.ferstStap = false;
                     createReserve(reserve);
                   } else {
-                    updateReserve(data._id, reserve);
+                    updateReserve(data.id, reserve);
                   }
                   seteditMode(!editMode);
                 }}
@@ -224,7 +226,8 @@ const OrderSheet = ({
                   if (reserve.ferstStap) {
                     reloadReserves();
                   } else {
-                    removeReserve(data._id);
+                    removeReserve(data.id);
+                    reloadReserves();
                   }
                 }}
                 className="sheet__button_basket"
